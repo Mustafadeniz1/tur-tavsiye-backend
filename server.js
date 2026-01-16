@@ -23,6 +23,11 @@ app.get('/', (req, res) => {
   res.send('Tour backend çalışıyor 🚀');
 });
 
+// ✅ HEALTH CHECK
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok" });
+});
+
 // Rotalar
 app.use('/api/auth', authRoutes);
 app.use("/api/places", placeRoutes);
