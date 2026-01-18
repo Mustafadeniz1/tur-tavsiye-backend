@@ -16,11 +16,19 @@ const getNearbyPlaces = async (req, res) => {
     if (category === "restaurant") type = "restaurant";
     if (category === "culture") type = "tourist_attraction";
 
+    // 🔴 KATEGORİYE GÖRE DİNAMİK RADIUS (metre)
+    let radius = 3000;
+
+    if (category === "restaurant") radius = 2500;
+    if (category === "hotel") radius = 4000;
+    if (category === "museum") radius = 8000;
+    if (category === "culture") radius = 6000;
+
     //satır kırılması olmasın diye  bu tarz yazılır valid 400 hatası almayalım diye 
     const url =
       `https://maps.googleapis.com/maps/api/place/nearbysearch/json` +
       `?location=${lat},${lng}` +
-      `&radius=3000` +
+      `&radius=${radius}` +
       `&type=${type}` +
       `&language=tr` +
       `&key=${process.env.GOOGLE_PLACES_API_KEY}`;
